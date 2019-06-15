@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+<link type="text/css" href="resources/css/tasks.css" rel="stylesheet">
 </head>
 <body>
 	<h2>Editar task - ${task.id}</h2>
@@ -17,7 +19,7 @@
 		<textarea name="descricao" rows="5" cols="100">${task.descricao}</textarea><br />
 		Finalizada? <input type="checkbox" name="finalizada" value="true" ${task.finalizada? 'checked' : ''} /><br/>
 		DataFinalização<br/>
-		<input type="text" name="dataFinalizacao" value="<fmt:formatDate value="${task.dataFinalizacao.time}" pattern="dd/mm/yyyy"/>" />
+		<input type="text" name="dataFinalizacao" value="<fmt:formatDate value="${task.dataFinalizacao.time}" pattern="dd/MM/yyyy"/>" />
 		<input type="submit" value="Editar">
 	</form>
 </body>

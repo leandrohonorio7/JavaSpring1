@@ -11,17 +11,30 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class TaskDao {
 
 	private final Connection connection;
 
-	public TaskDao() {
+	@Autowired
+	public TaskDao(DataSource dataSource) {
+//	public TaskDao(Connection connection) {
+//		try {
+//			this.connection = new ConnectionFactory().getConnection();
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//		this.connection = connection;
 		try {
-			this.connection = new ConnectionFactory().getConnection();
+			this.connection = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 
 

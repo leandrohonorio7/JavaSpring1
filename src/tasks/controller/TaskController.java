@@ -2,10 +2,12 @@ package tasks.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.ResponseBody;
 
 import tasks.dao.TaskDao;
 import tasks.modelo.Task;
@@ -15,8 +17,10 @@ public class TaskController {
 
 	private final TaskDao dao;
 	
-	public TaskController(){
-		dao = new TaskDao();
+	@Autowired
+	public TaskController(TaskDao dao){
+//		dao = new TaskDao();
+		this.dao = dao;
 	}
 	
 	@RequestMapping("novastask")
@@ -39,7 +43,9 @@ public class TaskController {
 	public String lista(Model model){
 		model.addAttribute("tasks", dao.getTasks());
 //		return "tasks/get-tasks";
-		return "tasks/get-tasks-ajax";
+//		return "tasks/get-tasks-ajax2";
+//		return "tasks/get-tasks-ajax3";
+		return "tasks/get-tasks-ajax4";
 	}
 	
 	@RequestMapping("excluitask")
@@ -66,8 +72,12 @@ public class TaskController {
 		return "redirect:gettasks";
 	}
 
+//	@ResponseBody
 	@RequestMapping("finalizatask")
-	public void finaliza(Long id) {
+	public String finaliza(Long id, Model model) {
 		dao.finaliza(id);
+		model.addAttribute("task", dao.getById(id));
+//		return "tasks/data-finalizada";
+		return "tasks/data-finalizada2";
 	}
 }
